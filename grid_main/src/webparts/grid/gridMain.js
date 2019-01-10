@@ -51,8 +51,14 @@ var gridExtention = (function(){
     };
 
     var formatDate = (dateStr) =>{
-        let date = new Date(dateStr);
-        let finalDate = date.format("dd/MM/yyyy");
+        // "2019-01-01T08:00:00Z"
+        var date = new Date(dateStr);
+        var year = date.getFullYear();
+        var month = (1 + date.getMonth()).toString();
+            month = month.length > 1 ? month : '0' + month;
+        var day = date.getDate().toString();
+            day = day.length > 1 ? day : '0' + day;
+        var finalDate = day + "/" +month+ "/"+ year;
 
         return finalDate;
     }

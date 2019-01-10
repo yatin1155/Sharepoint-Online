@@ -44,3 +44,7 @@
                     "searchable": false
                 }
             ],
+
+
+
+            Connect-SPOService -Url https://ivpdemo-admin.sharepoint.com

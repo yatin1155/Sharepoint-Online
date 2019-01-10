@@ -23,8 +23,7 @@ export interface IGridWebPartProps {
 export default class GridWebPart extends BaseClientSideWebPart<IGridWebPartProps> {
   
   public render(): void {
-    debugger;
-    console.log(myLib);
+    
     if(this.domElement.getElementsByClassName("portletMain").length == 1){
       this.domElement.innerHTML = "";
     }
@@ -57,91 +56,7 @@ export default class GridWebPart extends BaseClientSideWebPart<IGridWebPartProps
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>1</td>
-              <td>IVP Fund Alpha</td>
-              <td>IVP-Alpha-001</td>
-              <td>Beta Capital</td>
-              <td>25</td>
-              <td>25</td>
-              <td>Beta Capital LLC UK</td>
-              <td>1000000.00</td>
-              <td>800000.00</td>
-              <td>8000000.00</td>
-              <td>2019-01-01T08:00:00Z</td>
-              <td>BETA UK</td>
-              <td>ACN000001111</td>
-              <td>ACN000002222</td>
-              <td>IVP Feeder</td>
-            </tr>
-            <tr>
-              <td>2</td>
-              <td>IVP Fund Alpha</td>
-              <td>IVP-Alpha-002</td>
-              <td>Beta Capital</td>
-              <td>25</td>
-              <td>25</td>
-              <td>Beta Capital LLC UK</td>
-              <td>$1,000,000.00</td>
-              <td>$800,000.00</td>
-              <td>$8,000,000.00</td>
-              <td>2019-01-01T08:00:00Z</td>
-              <td>BETA UK</td>
-              <td>ACN000001111</td>
-              <td>ACN000002222</td>
-              <td>IVP Feeder</td>
-            </tr>
-            <tr>
-              <td>1</td>
-              <td>IVP Fund Alpha</td>
-              <td>IVP-Alpha-001</td>
-              <td>Beta Capital</td>
-              <td>25</td>
-              <td>25</td>
-              <td>Beta Capital LLC UK</td>
-              <td>1000000.00</td>
-              <td>800000.00</td>
-              <td>8000000.00</td>
-              <td>2019-01-01T08:00:00Z</td>
-              <td>BETA UK</td>
-              <td>ACN000001111</td>
-              <td>ACN000002222</td>
-              <td>IVP Feeder</td>
-            </tr>
-            <tr>
-              <td>2</td>
-              <td>IVP Fund Alpha</td>
-              <td>IVP-Alpha-002</td>
-              <td>Beta Capital</td>
-              <td>25</td>
-              <td>25</td>
-              <td>Beta Capital LLC UK</td>
-              <td>$1,000,000.00</td>
-              <td>$800,000.00</td>
-              <td>$8,000,000.00</td>
-              <td>2019-01-01T08:00:00Z</td>
-              <td>BETA UK</td>
-              <td>ACN000001111</td>
-              <td>ACN000002222</td>
-              <td>IVP Feeder</td>
-            </tr>
-            <tr>
-              <td>1</td>
-              <td>IVP Fund Alpha</td>
-              <td>IVP-Alpha-001</td>
-              <td>Beta Capital</td>
-              <td>25</td>
-              <td>25</td>
-              <td>Beta Capital LLC UK</td>
-              <td>1000000.00</td>
-              <td>800000.00</td>
-              <td>8000000.00</td>
-              <td>2019-01-01T08:00:00Z</td>
-              <td>BETA UK</td>
-              <td>ACN000001111</td>
-              <td>ACN000002222</td>
-              <td>IVP Feeder</td>
-            </tr>
+            
           </tbody>
         </table>
       </div>

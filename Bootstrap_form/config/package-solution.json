@@ -1,13 +1,13 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
   "solution": {
-    "name": "main-grid-client-side-solution2",
-    "id": "78fb34e7-4e7a-41a4-82e7-c8f8d5a4dfa8",
-    "version": "1.0.0.1",
+    "name": "new-opportunity-client-side-solution",
+    "id": "7741e5a5-2ae0-432b-b37a-db2e5a1a4e68",
+    "version": "1.0.0.0",
     "includeClientSideAssets": true,
     "isDomainIsolated": false
   },
   "paths": {
-    "zippedPackage": "solution/main-grid.sppkg"
+    "zippedPackage": "solution/new-opportunity.sppkg"
   }
 }
