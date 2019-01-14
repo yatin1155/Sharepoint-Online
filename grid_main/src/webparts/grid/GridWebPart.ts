@@ -38,20 +38,16 @@ export default class GridWebPart extends BaseClientSideWebPart<IGridWebPartProps
           <thead>
             <tr>
               <th>Id</th>
-              <th>Fund Name</th>
-              <th>Transaction Name</th>
+              <th>Opportunity Name</th>
+              <th>Fund</th>
+              <th>Fund Share Class</th>
+              <th>Tier</th>
               <th>Investor Name</th>
-              <th>Feeder ID</th>
-              <th>Master Id</th>
-              <th>Investor Entity</th>
-              <th>Requested Amount</th>
-              <th>Estimated Amount</th>
-              <th>Final Amount</th>
-              <th>Pay Date</th>
-              <th>From Account</th>
-              <th>From Account Number</th>
-              <th>To Account Number</th>
-              <th>To Account</th>
+              <th>Probability</th>
+              <th>High Limit</th>
+              <th>Low Limit</th>
+              <th>Date</th>
+              <th>Investor Document</th>
               
             </tr>
           </thead>

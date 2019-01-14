@@ -9,7 +9,7 @@ var gridExtention = (function(){
         handelEvents();
         $("#tableMain_length").remove();
         
-        $("#tableMain_filter label input").attr("placeholder","Search...");
+        $("#tableMain_filter label input").attr("placeholder","Enter Name...");
         // $(label).html('');
         // $(label).append(input_dt);
         // $(label).prepend("<i class='fa fa-search dt_searchBox' aria-hidden='true'></i>");
@@ -65,36 +65,15 @@ var gridExtention = (function(){
     var drawTable = function(){
         table_elm = $("#tableMain").DataTable({
             "scrollX": true,
-            "order": [[ 9, "desc" ]],
+            "order": [[ 7, "desc" ]],
             "autoWidth": false,
-            
             "language": {
                 "decimal": ".",
                 "thousands": ","
             },
-            "columnDefs": [
-                {
-                    "targets": [ 0,12,13 ],
-                    "visible": false,
-                    "searchable": false
-                },
-                {
-                    "render": function ( data, type, row ) {
-                        return fromatNumbers(data);
-                    },
-                    "targets": [ 7,8,9 ]
-                },
-                {
-                    "render": function ( data, type, row ) {
-                        
-                        return formatDate(data);
-                    },
-                    "targets": [10],
-
-                }
-            ],
+            
             'ajax': {
-                'url': "https://ivpdemo.sharepoint.com/_api/web/lists/getbytitle('Opportunity Dashboard')/items",
+                'url': "https://ivpdemo.sharepoint.com/_api/web/lists/getbytitle('Investment_Opportunity')/items",
                 'headers': { 
                     'Accept': 'application/json;odata=nometadata',
                     'odata-version': '' 
@@ -103,24 +82,48 @@ var gridExtention = (function(){
                     return data.value.map(function (item) {
                         return [
                             item.Id,
-                            item.Title,
-                            item.Transaction_x0020_Name,
-                            item.Investor_x0020_Name,
-                            item.Investor_x0020_Id,
-                            item.Investor_x0020_Master_x0020_Id,
-                            item.Investing_x0020_Entity,
-                            item.Requested_x0020_Amount,
-                            item.Estimated_x0020_Amount,
-                            item.Final_x0020_Amount,
-                            item.Pay_x0020_Date,
-                            item.From_x0020_Account,
-                            item.From_x0020_Account_x0020_Number,
-                            item.To_x0020_Account_x0020_Number,
-                            item.To_x0020_Account
+                            item.Opportunity_Name,
+                            item.Fund,
+                            item.Fund_Share_Class,
+                            item.Tier,
+                            item.Investor_Name,
+                            item.Probability,
+                            item.High_Inv_Limit,
+                            item.Low_Inv_Limit,
+                            item.Date,
+                            item.Send_Subs_Doc_Investor
                         ];
                     });
                 }
-            }
+            },
+            "columnDefs": [
+                {
+                    "targets": [ 0 ],
+                    "visible": false,
+                    "searchable": false
+                },
+                {
+                    "render": function ( data, type, row ) {
+                        return fromatNumbers(data);
+                    },
+                    "targets": [ 7,8 ]
+                },
+                {
+                    "render": function ( data, type, row ) {
+                        
+                        return formatDate(data);
+                    },
+                    "targets": [9],
+
+                },
+                {
+                    "render": function ( data, type, row ) {
+                        
+                        return "<i class='fa fa-external-link popOut' aria-hidden='true'></i>"+ data ;
+                    },
+                    "targets": 1   
+                }
+            ]
             
         });
     }
@@ -128,10 +131,13 @@ var gridExtention = (function(){
 
     var handelEvents = function(){
 
-        $('#tableMain tbody').on('click', 'tr', function () {
-            var data = table_elm.row( this ).data();
-            var queryParam = 'key='+data[0];
-            var baseUrl = 'https://ivpdemo.sharepoint.com/SitePages/Dummy-New.aspx?'+queryParam;
+        $('#tableMain tbody').on('click', '.popOut', function () {
+            var tr = $(this).closest("tr");
+            var data = table_elm.row( tr ).data();
+           
+            var queryParam = 'OpName='+data[1];
+
+            var baseUrl = 'https://ivpdemo.sharepoint.com/SitePages/Opportunity-Grid.aspx?'+encodeURIComponent(queryParam);
             
             // alert( 'You clicked on '+data[2]+'\'s row' );
             window.open(baseUrl,'_blank');
