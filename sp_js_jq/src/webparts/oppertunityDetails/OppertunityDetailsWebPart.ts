@@ -40,6 +40,7 @@ export default class OppertunityDetailsWebPart extends BaseClientSideWebPart<IOp
           </h8>
         </div>
         <div class="${styles["portlet-body"]} mdl-cell mdl-cell--12-col mdl-cell--12-col-table">
+        
           <form id="Opportunity_Form" role="form">
             <div class="grid-container">
               <div class="grid-item"></div>
@@ -58,6 +59,7 @@ export default class OppertunityDetailsWebPart extends BaseClientSideWebPart<IOp
               </button>
             </div>
           </div>
+          <div class="notify"><span id="notifyType" class=""></span></div>
         </div>
         <div>
 

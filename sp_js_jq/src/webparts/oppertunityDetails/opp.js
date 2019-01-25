@@ -238,7 +238,6 @@ var oppModule = (function () {
 
         var queryID = $("#Opportunity_Form").attr("queryid");
       var listItemUri = webUrl + "/_api/web/lists/getbytitle('" + listTitle + "')/items('"+queryID+"')";
-      // listItemUri ="https://ivpdemo.sharepoint.com/_api/web/lists/getbytitle('Investment_Opportunity')/items('45')";
       var itemPayload = {
         '__metadata': {
           'type': getItemTypeForListName(listTitle)
@@ -252,11 +251,23 @@ var oppModule = (function () {
 
 
     function printInfo() {
-      console.log('Item has been created');
+      $(".notify").toggleClass("active");
+      $("#notifyType").toggleClass("success");
+      
+      setTimeout(function(){
+        $(".notify").removeClass("active");
+        $("#notifyType").removeClass("success");
+      },3000);
     }
 
     function logError(error) {
-      console.log(JSON.stringify(error));
+      $(".notify").addClass("active");
+      $("#notifyType").addClass("failure");
+      
+      setTimeout(function(){
+        $(".notify").removeClass("active");
+        $("#notifyType").removeClass("failure");
+      },3000);
     }
   }
 
@@ -362,10 +373,12 @@ var oppModule = (function () {
     });
     $("#saveForm").off("click");
     $("#saveForm").on("click", function () {
-      $("#p12").removeClass("makeGlow");
       updateListData();
+     
+      $(".saveBtnGroup").css("display","none");
+      $("#editForm").css("display","block");
+      $("#p12").removeClass("makeGlow");
       $("#Opportunity_Form").addClass("disabled");
-      
     });
 
     $("#cancelForm").off("click");
