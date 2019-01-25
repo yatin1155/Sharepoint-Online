@@ -126,6 +126,8 @@ var gridExtention = (function(){
             ]
             
         });
+
+        $("#tableMain_wrapper").prepend("<span class='headerName'>Opportunity Dashboard</span>")
     }
 
 

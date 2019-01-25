@@ -90,7 +90,7 @@ $table-even: rgb(255,255,255);
   }
   #tableMain_filter label {
    
-    font-size: 19px;
+    font-size: 14px;
   }
   #tableMain_filter label .dt_searchBox{
     font-size: 20px;
@@ -114,6 +114,20 @@ i.fa {
 .sorting{
   background-image: none;
 }
+.commandBarWrapper{
+  display: none;
 
+}
+.headerName{
+  font-size: 21px;
+  font-weight: 600;
+  color: #004e8c;
+}
 
-
+div[data-automation-id='pageHeader'],.commandBarWrapper{
+  display: none !important;
+}
+  
+div[data-sp-feature-tag='Comments']{
+  display: none !important;
+}

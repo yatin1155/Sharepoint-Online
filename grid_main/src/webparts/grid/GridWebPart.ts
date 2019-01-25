@@ -40,7 +40,7 @@ export default class GridWebPart extends BaseClientSideWebPart<IGridWebPartProps
               <th>Id</th>
               <th>Opportunity Name</th>
               <th>Fund</th>
-              <th>Fund Share Class</th>
+              <th>Share Class</th>
               <th>Tier</th>
               <th>Investor Name</th>
               <th>Probability</th>

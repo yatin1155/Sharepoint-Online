@@ -48,3 +48,34 @@
 
 
             Connect-SPOService -Url https://ivpdemo-admin.sharepoint.com
+
+
+
+            "columnDefs": [
+                {
+                    "targets": [ 0,12,13 ],
+                    "visible": false,
+                    "searchable": false
+                },
+                {
+                    "render": function ( data, type, row ) {
+                        return fromatNumbers(data);
+                    },
+                    "targets": [ 7,8,9 ]
+                },
+                {
+                    "render": function ( data, type, row ) {
+                        
+                        return formatDate(data);
+                    },
+                    "targets": [10],
+
+                },
+                {
+                    "render": function ( data, type, row ) {
+                        
+                        return "<i class='fa fa-external-link popOut' aria-hidden='true'></i>"+ data ;
+                    },
+                    "targets": 1   
+                }
+            ],
