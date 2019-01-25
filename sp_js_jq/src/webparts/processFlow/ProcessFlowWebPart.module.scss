@@ -1,0 +1,219 @@
+// @import '~@microsoft/sp-office-ui-fabric-core/dist/sass/SPFabricCore.scss';
+$crumbs-back:#F3F5FA;
+$text-color:#8093A7;
+$layout-color : #00b294;
+$layout-disabled-color: #829e9a;
+$bg-color-blue: #182434;
+$bg-color-grey: #3a4552;
+$font-white: #ffffffe3;
+
+$ligh-blue: #004e8c;
+
+$disabled-Black : #525252;
+// body {
+//   margin: 100px auto;
+//   font-family: Helvetica;
+//   background: #FFF;
+// }
+
+#crumbs {
+  text-align: center;
+  height: 150px;
+  border: 2px solid $layout-color;
+  background: aliceblue;
+  height: 200px;
+  *{
+    box-sizing: unset !important;
+    -webkit-box-sizing: unset !important;
+  }
+  *:after,*::before{
+    box-sizing: unset !important;
+    -webkit-box-sizing: unset !important;
+  }
+  h1 {
+    padding: 0 0 30px;
+    text-transform: uppercase;
+    font-size: .9rem;
+    font-weight: 600;
+    letter-spacing: .01rem;
+    color: $text-color;
+  }
+  .scroll_arrow{
+    position: absolute;
+    top: 50%;
+    width: 44px;
+    height: 44px;
+    border: none;
+    border-radius: 50%;
+    background: white;
+    background: hsla(0, 0%, 73%, 0.75);
+    cursor: pointer;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    z-index: 3;
+  }
+  .scroll_arrow:disabled {
+    filter: alpha(opacity=30);
+    opacity: 0.3;
+    cursor: auto;
+  }
+  .scroll_arrow:hover {
+    background-color: #737373;
+    color: white;
+  }
+  .scroll_arrow_prev{
+    left: 10px;
+    background-image: linear-gradient(to left,rgba(0,0,0,.0001) 0,rgba(0,0,0,.5) 100%);
+  }
+
+  .scroll_arrow_next{
+    right: 10px;
+    background-image: linear-gradient(to right,rgba(0,0,0,.0001) 0,rgba(0,0,0,.5) 100%);
+  }
+  .ul {
+    // margin-top: 23px;
+    // margin-left: 45px;
+    padding-right: 0px;
+
+
+    list-style: none;
+    // display: inline-table;
+    display: inline-flex;
+    // width: 90%;
+    width: 100%;
+    overflow-x: auto;
+    height: 100%;
+    padding-top: 20px;
+    padding-top: 0px;
+    .li {
+      // display: inline;
+      position: relative;
+      margin-top: 3%;
+      width: 167px;
+      .dispText{
+        position: absolute;
+        width: 100%;
+        top: 34px;
+        left: 3%;
+        z-index: 3;
+        color: $ligh-blue;  
+      }
+      a,.alt {
+        top: 40px;
+        width: 80px;
+        display: block;
+        float: left;
+        height: 0px;
+        background: $ligh-blue;
+
+        text-align: center;
+        padding: 23px 20px 1px 60px;
+        position: relative;
+        margin: 0 5px 0 0;
+
+        font-size: 20px;
+        text-decoration: none;
+        color: #8093a7;
+
+        &:after {
+          content: "";
+          border-top: 12px solid transparent;
+          border-bottom: 12px solid transparent;
+          border-left: 12px solid $ligh-blue;
+          position: absolute;
+          right: -12px;
+          top: 0;
+          z-index: 1;
+        }
+
+        &:before {
+          content: "";
+          border-top: 12px solid transparent;
+          border-bottom: 12px solid transparent;
+          border-left: 12px solid #ffffff;
+          position: absolute;
+          left: 0;
+          top: 0;
+        }
+      }
+      .IconTxt{
+        font-weight: 600;
+        color: #004e8c;
+        top: 65%;
+        position: relative;
+      }
+    }
+    .disabled{
+      .dispText{
+          color: $disabled-Black;
+      }
+      a,.alt{
+        background-color: $disabled-Black;
+        &:after {
+          border-left-color: $disabled-Black;
+        }
+      }
+      .counter{
+        &:after {
+          border-color: $disabled-Black;
+        }
+      }
+    }
+    
+  }
+}
+
+
+
+
+
+
+#crumbs .ul .li:first-child a {
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+
+#crumbs .ul .li:first-child a:before {
+  display: none;
+}
+
+#crumbs .ul .li:last-child a {
+  padding-right: 40px;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+#crumbs .ul .li:last-child a:after {
+  display: none;
+}
+
+// #crumbs ul li a:hover {
+//   background: #357DFD;
+//   color:#fff;
+// }
+// #crumbs ul li a:hover:after {
+// 	border-left-color: #357DFD;
+//    color:#fff;
+// }
+
+#crumbs .counter{
+  position: absolute;
+    z-index: 2;
+    top: 0px;
+    left: 33px;
+  &:after {
+    content: "";
+    background-color: #e4e4e4;
+    font-family: FontAwesome;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 90px;
+    height: 90px;
+    border-radius: 9999px;
+    border: 10px solid $ligh-blue;
+    color: rgba(255, 255, 255, 0.6);
+  }
+}

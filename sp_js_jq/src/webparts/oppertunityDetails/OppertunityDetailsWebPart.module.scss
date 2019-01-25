@@ -1,0 +1,36 @@
+// $primary-color-blue: #182534;
+$primary-green: #00b294;
+$dark-blue: #004e8c;
+$light-portlet-blue: aliceblue;
+
+.portletMain{
+  margin-bottom: 0px;
+  overflow: hidden;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  border: 2px solid $primary-green;
+  background: $light-portlet-blue;
+  box-shadow: 0 0 1px rgba(0,0,0,.01), 0 2px 4px rgba(0,0,0,.08);
+  .portlet-title{
+    background-color: $dark-blue;
+    padding: 7px;
+    border: 2px solid #3a4552;
+    -webkit-box-shadow: 0 5px 40px -10px rgba(0,0,0,.57);
+    box-shadow: 5px 40px -10px rgba(0,0,0,.57);
+    color: white;
+    font-size: 16px;
+    .tools{
+      visibility: visible;
+      display: inline-block;
+      padding: 0;
+      margin: 0;
+      margin-top: 1px;
+      float: right;
+    }
+  }
+  .portlet-body{
+    padding: 0 8px 0 8px;
+  }
+
+};

@@ -1,0 +1,80 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "fund-info-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/fundInfo/FundInfoWebPart.js",
+          "manifest": "./src/webparts/fundInfo/FundInfoWebPart.manifest.json"
+        }
+      ]
+    },
+    "material-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/material/MaterialWebPart.js",
+          "manifest": "./src/webparts/material/MaterialWebPart.manifest.json"
+        }
+      ]
+    },
+    "list-data-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/listData/ListDataWebPart.js",
+          "manifest": "./src/webparts/listData/ListDataWebPart.manifest.json"
+        }
+      ]
+    },
+    "fund-summary-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/fundSummary/FundSummaryWebPart.js",
+          "manifest": "./src/webparts/fundSummary/FundSummaryWebPart.manifest.json"
+        }
+      ]
+    },
+    "process-flow-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/processFlow/ProcessFlowWebPart.js",
+          "manifest": "./src/webparts/processFlow/ProcessFlowWebPart.manifest.json"
+        }
+      ]
+    },
+    "oppertunity-details-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/oppertunityDetails/OppertunityDetailsWebPart.js",
+          "manifest": "./src/webparts/oppertunityDetails/OppertunityDetailsWebPart.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {
+    "material": {
+      "path": "https://cdnjs.cloudflare.com/ajax/libs/material-design-lite/1.3.0/material.js",
+      "globalName": "material"
+    },
+    "jquery": {
+      "path": "https://code.jquery.com/jquery-1.12.4.min.js",
+      "globalName": "jquery"
+    },
+    "bootstrap": {
+      "path": "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js",
+      "globalName": "bootstrap",
+      "globalDependencies": ["jquery"]
+    },
+    "datatables.net": "https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js",
+    "moment": "https://momentjs.com/downloads/moment.min.js"
+    
+  },
+  "localizedResources": {
+    "FundInfoWebPartStrings": "lib/webparts/fundInfo/loc/{locale}.js",
+    "MaterialWebPartStrings": "lib/webparts/material/loc/{locale}.js",
+    "ListDataWebPartStrings": "lib/webparts/listData/loc/{locale}.js",
+    "FundSummaryWebPartStrings": "lib/webparts/fundSummary/loc/{locale}.js",
+    "ProcessFlowWebPartStrings": "lib/webparts/processFlow/loc/{locale}.js",
+    "OppertunityDetailsWebPartStrings": "lib/webparts/oppertunityDetails/loc/{locale}.js"
+  }
+}

@@ -1,0 +1,64 @@
+// @import '~@microsoft/sp-office-ui-fabric-core/dist/sass/SPFabricCore.scss';
+
+$dark-Bg-color:#182434;
+$neon-orrange: #f89406;
+$Neon-Green : #00bfa5;
+$light-Bg-Color: #ffffff;
+$TextColor-Blue: #004e8c;
+$light-black: #3a4552;
+.componentParent{
+  
+
+  .largestLong{
+    width: 100%;
+    height: 100%;
+    float: left;
+  } 
+
+  .largest-longest {
+    
+    div.ll{
+      border-right: 1px solid hsla(0, 0%, 41%, 0.82);
+      margin-top: 12px;
+      padding: .6em .5em .5em .5em;
+      text-align: center;
+    }
+    div.ll.last{
+      border-right: none;
+      
+    }
+    .boldSpan{
+      .toChangeVal{
+        color: $Neon-Green;
+      }
+    }
+
+  }
+
+  .toChangeVal{
+    font-size: 1.7em !important;
+    height: auto;
+    padding-bottom: 7px;
+    font-weight: 600 !important;
+    line-height: 14px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    color: $TextColor-Blue;
+  }
+
+  .attriName{
+    color: $light-black;
+    padding-top: 3px;
+    font-size: 1.2em!important;
+    font-weight: 600;
+    height: 16px;
+  }
+}
+
+.cardNew{
+  background-color: $light-Bg-Color;
+  height: 75px;
+  border: 2px solid $Neon-Green;
+  background: #f0f8ff;
+}
