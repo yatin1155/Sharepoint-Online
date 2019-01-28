@@ -1,0 +1,13 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "lead-creation-client-side-solution",
+    "id": "5d7b163b-1c3f-456a-bc2f-22a820fb617d",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "isDomainIsolated": false
+  },
+  "paths": {
+    "zippedPackage": "solution/lead-creation.sppkg"
+  }
+}

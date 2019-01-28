@@ -411,17 +411,5 @@ var oppModule = (function () {
 
 
 $(document).ready(function () {
-
-  $('#mainBtn').click(function () {
-    $('.floating-menus').toggle();
-    var btnText = $("#mainBtn i").text();
-    if (btnText == "add") {
-      $("#mainBtn i").text("clear");
-    } else {
-      $("#mainBtn i").text("add");
-    }
-  });
-
-
   oppModule.init();
 });

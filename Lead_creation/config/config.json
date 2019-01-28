@@ -1,0 +1,18 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "lead-form-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/leadForm/LeadFormWebPart.js",
+          "manifest": "./src/webparts/leadForm/LeadFormWebPart.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "LeadFormWebPartStrings": "lib/webparts/leadForm/loc/{locale}.js"
+  }
+}
