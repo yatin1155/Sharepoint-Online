@@ -51,19 +51,22 @@ var oppModule = (function () {
       "jsonName": "Low_Inv_Limit",
       "type": "textField",
       "dataType": "number",
-      "displayName": "Low ($)"
+      "displayName": "Low ($)",
+      "precision":2
     },
     {
       "jsonName": "High_Inv_Limit",
       "type": "textField",
       "dataType": "number",
-      "displayName": "High ($)"
+      "displayName": "High ($)",
+      "precision":2
     },
     {
       "jsonName": "Final_x0020_Commitment",
       "type": "textField",
       "dataType": "number",
-      "displayName": "Final Commitment ($)"
+      "displayName": "Final Commitment ($)",
+      "precision":2
     },
     {
       "jsonName": "Percentage_Fund_Allocation",
@@ -75,7 +78,10 @@ var oppModule = (function () {
       "jsonName": "Fund_Investment",
       "type": "textField",
       "dataType": "number",
-      "displayName": "Fund Investment ($)"
+      "displayName": "Fund Investment ($)",
+      "precision":2,
+      "property":"readonly",
+      "addClass":"forcedDisabled"
     },
     {
       "jsonName": "Date",
@@ -154,7 +160,7 @@ var oppModule = (function () {
           let itemValue = finalArr[obj.jsonName];
           if(obj.dataType === "number" ){
             
-            itemValue=fromatNumbers(itemValue+"");
+            itemValue=fromatNumbers(itemValue+"",obj.precision);
           }
 
           obj["value"] = itemValue;
@@ -287,7 +293,8 @@ var oppModule = (function () {
 
 
   }
-  var fromatNumbers = (nStr) =>{
+  var fromatNumbers = (nStr,precision=0) =>{
+    nStr = parseFloat(nStr).toFixed(precision);
     nStr += '';
     var x = nStr.split('.');
     var x1 = x[0];
@@ -297,17 +304,15 @@ var oppModule = (function () {
             x1 = x1.replace(rgx, '$1' + ',' + '$2');
     }
     return x1 + x2;
-
 };
   var drawTemplate = (dataObj) => {
     var domArr = [];
     $.each(dataObj, function (k, v) {
-
       if (v.type === "textField") {
 
         if (v.dataType === "string") {
           var str = `<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label is-dirty ${v.addClass}">
-                                    <input class="mdl-textfield__input" type="text" id="${v.jsonName}">
+                                    <input class="mdl-textfield__input" type="text" id="${v.jsonName}" ${v.property} ${v.addAttr}>
                                     <label class="mdl-textfield__label" for="${v.jsonName}">${v.displayName}</label>
                                 </div>`;
           domArr.push(str);
@@ -315,7 +320,7 @@ var oppModule = (function () {
 
          
           var str = `<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label ${v.addClass}">
-                                    <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)*(\,[0-9]+)?" id="${v.jsonName}">
+                                    <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)*(\,[0-9]+)?" id="${v.jsonName}" ${v.property} ${v.addAttr}>
                                     <label class="mdl-textfield__label" for="${v.jsonName}">${v.displayName}</label>
                                     <span class="mdl-textfield__error">Input is not a number.</span>
                                 </div>`;
@@ -324,17 +329,17 @@ var oppModule = (function () {
         } else if (v.dataType === "percentage") {
 
           var str = `<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label ${v.addClass}">
-                                    <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="${v.jsonName}">
+                                    <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="${v.jsonName}" ${v.property} ${v.addAttr}>
                                     <label class="mdl-textfield__label" for="${v.jsonName}">${v.displayName}</label>
                                     <span class="mdl-textfield__error">Input is not a number.</span>
                                 </div>`;
           domArr.push(str);
         } else if (v.dataType === "date") {
 
+
         }
 
       } else if (v.type == "dropDown") {
-
         var str = `<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label ${v.addClass}" styles="${v.styles}"> 
                                 <select class="mdl-textfield__input" id="${v.jsonName}" name="${v.jsonName}">
                                 <option value="None">None</option>
@@ -343,6 +348,7 @@ var oppModule = (function () {
                                 <option value="Send Documents">Send Documents</option>
                                 <option value="Response Received">Response Received</option>
                                 </select>
+                                ${v.value =="Response Received"? '<i class="fa fa-external-link-square docPopout"></i>':''}
                                 <label class="mdl-textfield__label" for="${v.jsonName}">${v.displayName}</label>
                             </div>`
         domArr.push(str);
@@ -362,6 +368,11 @@ var oppModule = (function () {
 
   var eventListeners = () => {
 
+    $(".mdl-textfield .docPopout").off("click");
+    $(".mdl-textfield .docPopout").on("click",()=>{
+      $(event.target).attr("class");
+      window.open("https://ivpdemo.sharepoint.com/Subscription%20Documentation/Forms/AllItems.aspx",'_blank');
+    })
     $("#editForm").off("click");
     $("#editForm").on("click", function () {
       $("#editForm").css("display","none"); //Hide edit btn
@@ -375,10 +386,15 @@ var oppModule = (function () {
     $("#saveForm").on("click", function () {
       updateListData();
      
+      
       $(".saveBtnGroup").css("display","none");
       $("#editForm").css("display","block");
       $("#p12").removeClass("makeGlow");
       $("#Opportunity_Form").addClass("disabled");
+      
+      setTimeout(function(){
+        location.reload();
+      },3000);
     });
 
     $("#cancelForm").off("click");

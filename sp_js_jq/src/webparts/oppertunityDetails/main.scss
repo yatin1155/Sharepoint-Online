@@ -182,3 +182,14 @@ div[data-sp-feature-tag='Comments']{
     Content:"Request failed. Please try again !";
     color: #b71c1c;
   }
+  #Send_Subs_Doc_Investor{
+    width: 90%;
+    margin-right: 10px;
+    display: inline-block;
+    
+  }
+  .docPopout{
+    pointer-events: all;
+    cursor: pointer;
+    color: #004e8c;
+}
