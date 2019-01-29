@@ -1,0 +1,40 @@
+
+
+
+
+#Lead_Form{
+    .grid-item {
+        display: grid;
+        grid-template-columns: 35% 35% 35%;
+        label {
+            color: #004e8c;
+        }
+        .mdl-textfield__label:after {
+            background-color: #004e8c!important;
+        }
+        .mdl-textfield {
+            width: 85%;
+        }
+        .mdl-textfield__input {
+            border-bottom: 1px solid #004e8c!important;
+            background: #f0f8ff !important;
+        }
+        .mdl-textfield--floating-label.has-placeholder .mdl-textfield__label,.mdl-textfield--floating-label.is-dirty .mdl-textfield__label,.mdl-textfield--floating-label.is-focused .mdl-textfield__label {
+            color: #004e8c!important;
+        }
+    }
+    
+}
+.btnGroup, .saveBtnGroup {
+    display: inline-block;
+}
+.btnGroup {
+    float: right;
+}
+ #saveForm {
+    color: #fff;
+    background-color: #004e8c;
+}
+#cancelForm {
+    background-color: grey;
+}

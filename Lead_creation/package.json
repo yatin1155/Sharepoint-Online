@@ -12,11 +12,13 @@
   },
   "dependencies": {
     "@microsoft/sp-core-library": "1.7.0",
-    "@microsoft/sp-webpart-base": "1.7.0",
     "@microsoft/sp-lodash-subset": "1.7.0",
     "@microsoft/sp-office-ui-fabric-core": "1.7.0",
+    "@microsoft/sp-webpart-base": "1.7.0",
+    "@types/es6-promise": "0.0.33",
     "@types/webpack-env": "1.13.1",
-    "@types/es6-promise": "0.0.33"
+    "fetch-inject": "^2.0.2",
+    "material-design-lite": "^1.3.0"
   },
   "devDependencies": {
     "@microsoft/sp-build-web": "1.7.0",
