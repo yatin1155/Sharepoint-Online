@@ -18,28 +18,28 @@ var oppModule = (function () {
       "dataType": "string",
       "displayName": "Fund Name",
       "addClass":"forcedDisabled"
-    },
-    {
-      "jsonName": "Fund_Share_Class",
-      "type": "textField",
-      "dataType": "string",
-      "displayName": "Fund Share Class",
-      "addClass":"forcedDisabled"
-    },
-    {
-      "jsonName": "Tier",
-      "type": "textField",
-      "dataType": "string",
-      "displayName": "Tier",
-      "addClass":"forcedDisabled"
-    },
-    {
+    },{
       "jsonName": "Investor_Name",
       "type": "textField",
       "dataType": "string",
       "displayName": "Investor Name",
       "addClass":"forcedDisabled"
     },
+    {
+      "jsonName": "Fund_Share_Class",
+      "type": "textField",
+      "dataType": "string",
+      "displayName": "Fund Share Class",
+      "addClass":""
+    },
+    {
+      "jsonName": "Tier",
+      "type": "textField",
+      "dataType": "string",
+      "displayName": "Tier",
+      "addClass":""
+    },
+    
     
     {
       "jsonName": "Probability",
