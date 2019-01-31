@@ -22,6 +22,7 @@ $disabled-Black : #525252;
   border: 2px solid $layout-color;
   background: aliceblue;
   height: 200px;
+  height: 185px;
   *{
     box-sizing: unset !important;
     -webkit-box-sizing: unset !important;
@@ -97,7 +98,7 @@ $disabled-Black : #525252;
         top: 34px;
         left: 3%;
         z-index: 3;
-        color: $ligh-blue;  
+        color: $ligh-blue; 
       }
       a,.alt {
         top: 40px;

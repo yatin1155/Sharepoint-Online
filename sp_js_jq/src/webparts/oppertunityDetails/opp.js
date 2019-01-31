@@ -190,7 +190,7 @@ var oppModule = (function () {
     });
   };
   var temp = () => {
-    var getattrArr = ["Probability","Low_Inv_Limit","High_Inv_Limit","Final_x0020_Commitment","Percentage_Fund_Allocation","Fund_Investment","Send_Subs_Doc_Investor","Add_Comment"]
+    var getattrArr = ["Tier","Fund_Share_Class","Probability","Low_Inv_Limit","High_Inv_Limit","Final_x0020_Commitment","Percentage_Fund_Allocation","Fund_Investment","Send_Subs_Doc_Investor","Add_Comment"]
     // var itemArr = updatedHeaders.filter((obj)=>{
     //   if(getattrArr.includes(obj.jsonName)){
     //     return true;
@@ -348,7 +348,7 @@ var oppModule = (function () {
                                 <option value="Send Documents">Send Documents</option>
                                 <option value="Response Received">Response Received</option>
                                 </select>
-                                ${v.value =="Response Received"? '<i class="fa fa-external-link-square docPopout"></i>':''}
+                                ${v.value =="Response Received"? '<i class="fa fa-folder-open docPopout"></i>':''}
                                 <label class="mdl-textfield__label" for="${v.jsonName}">${v.displayName}</label>
                             </div>`
         domArr.push(str);
