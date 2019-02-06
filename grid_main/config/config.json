@@ -12,12 +12,17 @@
     }
   },
   "externals": {
-    "jquery": "https://code.jquery.com/jquery-3.3.1.js",
-    "datatables": "https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js",
-    "fixedColumns": "https://cdn.datatables.net/fixedcolumns/3.2.6/js/dataTables.fixedColumns.min.js"
+    "jquery": {
+      "path":"https://code.jquery.com/jquery-3.3.1.js",
+      "globalName": "jquery"
+    },
+    "datatables.net": {
+      "path": "/src/dataT.js",
+      "globalName": "jquery",
+      "globalDependencies": ["jquery"]
+    }
   },
   "localizedResources": {
-    "GridWebPartStrings": "lib/webparts/grid/loc/{locale}.js",
-    "HelloWorldWebPartStrings": "lib/webparts/helloWorld/loc/{locale}.js"
+    "GridWebPartStrings": "lib/webparts/grid/loc/{locale}.js"
   }
 }

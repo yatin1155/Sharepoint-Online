@@ -6,34 +6,26 @@ import {
 } from '@microsoft/sp-webpart-base';
 import { escape } from '@microsoft/sp-lodash-subset';
 
-//import styles from './a.module.scss';
+import styles from './OppGridWebPart.module.scss';
+import * as strings from 'OppGridWebPartStrings';
 
-// require('./a.css');
-var myLib = require("./gridMain.js");
-import * as strings from 'GridWebPartStrings';
-import './a.scss';
-import 'jquery';
-import 'datatables.net';
-
-
-export interface IGridWebPartProps {
+export interface IOppGridWebPartProps {
   description: string;
 }
 
-export default class GridWebPart extends BaseClientSideWebPart<IGridWebPartProps> {
-  
+import "./OppGridWebpart.scss";
+import 'jquery';
+import 'datatables.net';
+
+export default class OppGridWebPart extends BaseClientSideWebPart<IOppGridWebPartProps> {
+
   public render(): void {
-    
-    if(this.domElement.getElementsByClassName("portletMain").length == 1){
-      this.domElement.innerHTML = "";
-    }
     this.domElement.innerHTML = `
     
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css" />
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
     <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
     
-      <div class="portletMain" id="p12"> 
+      <div class="portletMain" id="p12Grid"> 
         <table id="tableMain" class="hover" style="width:100%">
           <thead>
             <tr>
@@ -48,7 +40,6 @@ export default class GridWebPart extends BaseClientSideWebPart<IGridWebPartProps
               <th>Low Limit</th>
               <th>Date</th>
               <th>Investor Document</th>
-              
             </tr>
           </thead>
           <tbody>
@@ -56,15 +47,14 @@ export default class GridWebPart extends BaseClientSideWebPart<IGridWebPartProps
           </tbody>
         </table>
       </div>
+      <div class="filterBox"></div>
     `;
-    // require('./d.js');
-    var jsGrid = require('./gridMain.js');
-    jsGrid["gridExtention"]()["init"]();
 
+    var a = require('./oppGrid.js');
   }
 
   protected get dataVersion(): Version {
-    return Version.parse('1.1');
+    return Version.parse('1.0');
   }
 
   protected getPropertyPaneConfiguration(): IPropertyPaneConfiguration {

@@ -49,6 +49,14 @@
           "manifest": "./src/webparts/oppertunityDetails/OppertunityDetailsWebPart.manifest.json"
         }
       ]
+    },
+    "opp-grid-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/oppGrid/OppGridWebPart.js",
+          "manifest": "./src/webparts/oppGrid/OppGridWebPart.manifest.json"
+        }
+      ]
     }
   },
   "externals": {
@@ -63,11 +71,12 @@
     "bootstrap": {
       "path": "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js",
       "globalName": "bootstrap",
-      "globalDependencies": ["jquery"]
+      "globalDependencies": [
+        "jquery"
+      ]
     },
     "datatables.net": "https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js",
     "moment": "https://momentjs.com/downloads/moment.min.js"
-    
   },
   "localizedResources": {
     "FundInfoWebPartStrings": "lib/webparts/fundInfo/loc/{locale}.js",
@@ -75,6 +84,7 @@
     "ListDataWebPartStrings": "lib/webparts/listData/loc/{locale}.js",
     "FundSummaryWebPartStrings": "lib/webparts/fundSummary/loc/{locale}.js",
     "ProcessFlowWebPartStrings": "lib/webparts/processFlow/loc/{locale}.js",
-    "OppertunityDetailsWebPartStrings": "lib/webparts/oppertunityDetails/loc/{locale}.js"
+    "OppertunityDetailsWebPartStrings": "lib/webparts/oppertunityDetails/loc/{locale}.js",
+    "OppGridWebPartStrings": "lib/webparts/oppGrid/loc/{locale}.js"
   }
 }

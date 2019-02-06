@@ -18,7 +18,7 @@ var processModule = (function () {
         "status": null
     },
     {
-        "headerName": "Documents Received",
+        "headerName": "Documents Status",
         "jsonName": "Subs_Documents_Recd",
         "Tooltip": null,
         "fontIcon": "fa-file",
@@ -46,7 +46,7 @@ var processModule = (function () {
         "status": null
     },
     {
-        "headerName": "Treasury Approval",
+        "headerName": "Treasury Acceptance",
         "jsonName": "Treasury_Approval",
         "Tooltip": null,
         "fontIcon": "fa-money",
@@ -89,9 +89,8 @@ var processModule = (function () {
     let domArr = [];
 
     $.each(processArr,(key,value)=>{
-
         var str = `
-            <div class="${styles.li} ${value.status ==="Remaining" ? styles.disabled :""} ${value.status === "InProgress"? "activeTooltip":""}" tooltip="${value.Tooltip}" id="${value.jsonName}_Process">
+            <div class="${styles.li} ${value.status ==="Remaining" ? styles.disabled :""} ${value.status ==="Rejected" ? styles.rejected :""} ${value.status === "InProgress" || value.status ==="Rejected"? "activeTooltip":""}" tooltip="${value.Tooltip}" id="${value.jsonName}_Process">
             <div Class="${styles.dispText}">
                 <i class="fa ${value.fontIcon} fa-3x" aria-hidden="true" style="text-align: center;"></i>
             </div>

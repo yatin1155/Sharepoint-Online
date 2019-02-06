@@ -161,6 +161,24 @@ $disabled-Black : #525252;
         }
       }
     }
+    .rejected  {
+      .dispText{
+        color: #e83333;
+      }
+      a,.alt{
+        background-color: #e83333;
+        &:after {
+          border-left-color: #e83333;
+        }
+      }
+      .counter{
+        &:after {
+          border-color: #e83333;
+          background-color: #f9dcdc;
+        }
+      }
+    }
+    
     
   }
 }

@@ -27,12 +27,13 @@ export default class LeadFormWebPart extends BaseClientSideWebPart<ILeadFormWebP
     this.domElement.innerHTML = `
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
     
     <div class="${styles.portletMain} mdl-grid" id="p13Lead">
         <div class="${styles["portlet-title"]} mdl-cell mdl-cell--12-col mdl-cell--12-col-table">
           <h8>
-            <i class="fa fa-table"></i>
+            
             Lead Creation Form
           </h8>
         </div>
@@ -64,7 +65,8 @@ export default class LeadFormWebPart extends BaseClientSideWebPart<ILeadFormWebP
         <div>
     `;
     
-    require("./lead_main.js");
+    var jsMain = require("./lead_main.js");
+    jsMain["leadFormModule"]()["init"]();
   }
 
   protected get dataVersion(): Version {

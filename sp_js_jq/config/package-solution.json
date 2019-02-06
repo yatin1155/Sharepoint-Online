@@ -3,7 +3,7 @@
   "solution": {
     "name": "sp-js-jq-client-side-solution",
     "id": "7f190a46-4072-4af5-bdf0-95c4dbc9bc44",
-    "version": "1.0.0.1",
+    "version": "1.0.0.2",
     "includeClientSideAssets": true,
     "isDomainIsolated": false
   },

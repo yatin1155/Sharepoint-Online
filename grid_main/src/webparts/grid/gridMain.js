@@ -1,7 +1,5 @@
 
-import styles from './GridWebPart.module.scss';
-
-var gridExtention = (function(){
+var gridExtention = function(){
     var table_elm;
     var init = function(){
         
@@ -166,8 +164,12 @@ var gridExtention = (function(){
         init:init
     };
 
-})();
+};
 
-$(document).ready (function () {
-    gridExtention.init();
+$(document).ready(function () {
+    gridExtention().init();
 });
+
+
+
+export {gridExtention};

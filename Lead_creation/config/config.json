@@ -13,16 +13,17 @@
   },
   "externals": {
     
-    "select2":{
-      "path": "https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.js",
-      "globalName": "select2"
-    },
+    
     "material": {
       "path": "https://cdnjs.cloudflare.com/ajax/libs/material-design-lite/1.3.0/material.js",
       "globalName": "material"
     },
+    "select2Lib":{
+      "path": "https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.js",
+      "globalName": "select2Lib"
+    },
     "jquery": {
-      "path": "https://code.jquery.com/jquery-1.12.4.min.js",
+      "path":"https://code.jquery.com/jquery-3.3.1.js",
       "globalName": "jquery"
     }
   },

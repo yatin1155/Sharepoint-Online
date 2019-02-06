@@ -1,8 +1,8 @@
 {
   "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.2/MicrosoftTeams.schema.json",
   "manifestVersion": "1.2",
-  "packageName": "OppertunityDetails",
-  "id": "3f685482-90d2-477f-96cc-be92a8d444f2",
+  "packageName": "OppGrid",
+  "id": "b47885b8-4218-48f6-9188-063f9a86673c",
   "version": "0.1",
   "developer": {
     "name": "SPFx + Teams Dev",
@@ -11,11 +11,11 @@
     "termsOfUseUrl": "https://www.microsoft.com/en-us/servicesagreement"
   },
   "name": {
-    "short": "OppertunityDetails"
+    "short": "OppGrid"
   },
   "description": {
-    "short": "Oppertunity Details description",
-    "full": "Oppertunity Details description"
+    "short": "opp-Grid description",
+    "full": "opp-Grid description"
   },
   "icons": {
     "outline": "tab20x20.png",
@@ -24,7 +24,7 @@
   "accentColor": "#004578",
   "configurableTabs": [
     {
-      "configurationUrl": "https://{teamSiteDomain}{teamSitePath}/_layouts/15/TeamsLogon.aspx?SPFX=true&dest={teamSitePath}/_layouts/15/teamshostedapp.aspx%3FopenPropertyPane=true%26teams%26componentId=3f685482-90d2-477f-96cc-be92a8d444f2",
+      "configurationUrl": "https://{teamSiteDomain}{teamSitePath}/_layouts/15/TeamsLogon.aspx?SPFX=true&dest={teamSitePath}/_layouts/15/teamshostedapp.aspx%3FopenPropertyPane=true%26teams%26componentId=b47885b8-4218-48f6-9188-063f9a86673c",
       "canUpdateConfiguration": false,
       "scopes": [
         "team"

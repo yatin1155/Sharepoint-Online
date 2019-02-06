@@ -10,37 +10,37 @@ var oppModule = (function () {
       "type": "textField",
       "dataType": "string",
       "displayName": "Opportunity Name",
-      "addClass":"forcedDisabled"
+      "addClass": "forcedDisabled"
     },
     {
       "jsonName": "Fund",
       "type": "textField",
       "dataType": "string",
       "displayName": "Fund Name",
-      "addClass":"forcedDisabled"
-    },{
+      "addClass": "forcedDisabled"
+    }, {
       "jsonName": "Investor_Name",
       "type": "textField",
       "dataType": "string",
       "displayName": "Investor Name",
-      "addClass":"forcedDisabled"
+      "addClass": "forcedDisabled"
     },
     {
       "jsonName": "Fund_Share_Class",
       "type": "textField",
       "dataType": "string",
       "displayName": "Fund Share Class",
-      "addClass":""
+      "addClass": ""
     },
     {
       "jsonName": "Tier",
       "type": "textField",
       "dataType": "string",
       "displayName": "Tier",
-      "addClass":""
+      "addClass": ""
     },
-    
-    
+
+
     {
       "jsonName": "Probability",
       "type": "textField",
@@ -52,21 +52,21 @@ var oppModule = (function () {
       "type": "textField",
       "dataType": "number",
       "displayName": "Low ($)",
-      "precision":2
+      "precision": 2
     },
     {
       "jsonName": "High_Inv_Limit",
       "type": "textField",
       "dataType": "number",
       "displayName": "High ($)",
-      "precision":2
+      "precision": 2
     },
     {
       "jsonName": "Final_x0020_Commitment",
       "type": "textField",
       "dataType": "number",
       "displayName": "Final Commitment ($)",
-      "precision":2
+      "precision": 2
     },
     {
       "jsonName": "Percentage_Fund_Allocation",
@@ -79,9 +79,9 @@ var oppModule = (function () {
       "type": "textField",
       "dataType": "number",
       "displayName": "Fund Investment ($)",
-      "precision":2,
-      "property":"readonly",
-      "addClass":"forcedDisabled"
+      "precision": 2,
+      "property": "readonly",
+      "addClass": "forcedDisabled"
     },
     {
       "jsonName": "Date",
@@ -100,28 +100,28 @@ var oppModule = (function () {
       "type": "textArea",
       "dataType": "string",
       "displayName": "Comments",
-      "addClass":"forcedDisabled",
-      "property":"readonly",
-      "addAttr":'placeholder="No Comments present..."',
-      "styles":"grid-column: 1 / span 2;width: 95%;"
+      "addClass": "forcedDisabled",
+      "property": "readonly",
+      "addAttr": 'placeholder="No Comments present..."',
+      "styles": "grid-column: 1 / span 2;width: 95%;"
     },
     {
       "jsonName": "Add_Comment",
       "type": "textArea",
       "dataType": "string",
       "displayName": "Add Comments",
-      "addClass":""
+      "addClass": ""
     }
   ];
-  var webUrl ="https://ivpdemo.sharepoint.com";
+  var webUrl = "https://ivpdemo.sharepoint.com";
   var listTitle = 'Investment_Opportunity';
   var filterQuery;
-  var getJsonName = (headers) => {
+  var getJsonName = function (headers) {
     var jsonArr = headers.map((obj) => {
       return obj.jsonName;
     });
     return jsonArr;
-  }
+  };
   var decodeUrl = () => {
 
     let URL = window.location.href;
@@ -131,12 +131,13 @@ var oppModule = (function () {
   var init = () => {
     getdata();
   }
+  
   var retrieveListItems = () => {
 
     var listName = "Investment_Opportunity";
 
     filterQuery = decodeUrl();
-    
+
     var URL = "https://ivpdemo.sharepoint.com/_api/web/lists/getbytitle('" + listName + "')/items?$filter=Opportunity_Name eq '" + filterQuery[1] + "'"
     return $.ajax({
       url: URL,
@@ -146,10 +147,11 @@ var oppModule = (function () {
         'odata-version': ''
       },
       success: function (data) {
+
         var JnName = getJsonName(gHeaders);
         var finalArr = {};
         var dataToReturn = data.value.map(function (item) {
-            $("#Opportunity_Form").attr("QueryID",item["ID"]);
+          $("#Opportunity_Form").attr("QueryID", item["ID"]);
           $.each(JnName, (key, value) => {
             finalArr[value] = item[value]
           });
@@ -158,9 +160,12 @@ var oppModule = (function () {
 
         updatedHeaders = gHeaders.map((obj) => {
           let itemValue = finalArr[obj.jsonName];
-          if(obj.dataType === "number" ){
-            
-            itemValue=fromatNumbers(itemValue+"",obj.precision);
+          if (obj.dataType === "number") {
+            if (itemValue == null) {
+              itemValue = 0;
+            }
+            itemValue = fromatNumbers(itemValue + "", obj.precision);
+
           }
 
           obj["value"] = itemValue;
@@ -190,7 +195,7 @@ var oppModule = (function () {
     });
   };
   var temp = () => {
-    var getattrArr = ["Tier","Fund_Share_Class","Probability","Low_Inv_Limit","High_Inv_Limit","Final_x0020_Commitment","Percentage_Fund_Allocation","Fund_Investment","Send_Subs_Doc_Investor","Add_Comment"]
+    var getattrArr = ["Tier", "Fund_Share_Class", "Probability", "Low_Inv_Limit", "High_Inv_Limit", "Final_x0020_Commitment", "Percentage_Fund_Allocation", "Fund_Investment", "Send_Subs_Doc_Investor", "Add_Comment"]
     // var itemArr = updatedHeaders.filter((obj)=>{
     //   if(getattrArr.includes(obj.jsonName)){
     //     return true;
@@ -198,7 +203,7 @@ var oppModule = (function () {
     //     return false;
     //   }
     // });
-    var itemProperties ={};
+    var itemProperties = {};
 
     // $.each(itemArr,(obj)=>{
     //   itemProperties[obj.jsonName] = 
@@ -207,15 +212,15 @@ var oppModule = (function () {
     // {
     //   'Investor_Name': 'Yatin Kapur'
     // };
-    $.each(getattrArr,(key,value)=>{
-     var data = $("#"+value).val();
-     itemProperties[value] = data;
+    $.each(getattrArr, (key, value) => {
+      var data = $("#" + value).val();
+      itemProperties[value] = data;
     })
 
     console.log(itemProperties);
 
     //////Get data from the form
-    updateListItem(webUrl,itemProperties, printInfo, logError,listTitle);
+    updateListItem(webUrl, itemProperties, printInfo, logError, listTitle);
 
     function updateJson(endpointUri, payload, success, error) {
       $.ajax({
@@ -235,15 +240,15 @@ var oppModule = (function () {
     }
 
     function getItemTypeForListName(name) {
-    //   return "SP.Data." + name.charAt(0).toUpperCase() + name.slice(1) + "ListItem";
-    return "SP.Data.Investment_x005f_OpportunityListItem";
-    
+      //   return "SP.Data." + name.charAt(0).toUpperCase() + name.slice(1) + "ListItem";
+      return "SP.Data.Investment_x005f_OpportunityListItem";
+
     }
 
-    function updateListItem(webUrl,itemProperties, success, failure,listTitle) {
+    function updateListItem(webUrl, itemProperties, success, failure, listTitle) {
 
-        var queryID = $("#Opportunity_Form").attr("queryid");
-      var listItemUri = webUrl + "/_api/web/lists/getbytitle('" + listTitle + "')/items('"+queryID+"')";
+      var queryID = $("#Opportunity_Form").attr("queryid");
+      var listItemUri = webUrl + "/_api/web/lists/getbytitle('" + listTitle + "')/items('" + queryID + "')";
       var itemPayload = {
         '__metadata': {
           'type': getItemTypeForListName(listTitle)
@@ -259,21 +264,21 @@ var oppModule = (function () {
     function printInfo() {
       $(".notify").toggleClass("active");
       $("#notifyType").toggleClass("success");
-      
-      setTimeout(function(){
+
+      setTimeout(function () {
         $(".notify").removeClass("active");
         $("#notifyType").removeClass("success");
-      },3000);
+      }, 3000);
     }
 
     function logError(error) {
       $(".notify").addClass("active");
       $("#notifyType").addClass("failure");
-      
-      setTimeout(function(){
+
+      setTimeout(function () {
         $(".notify").removeClass("active");
         $("#notifyType").removeClass("failure");
-      },3000);
+      }, 3000);
     }
   }
 
@@ -289,11 +294,11 @@ var oppModule = (function () {
     parseData(dataObj);
     eventListeners();
 
-    $(".saveBtnGroup").css("display","none");
+    $(".saveBtnGroup").css("display", "none");
 
 
   }
-  var fromatNumbers = (nStr,precision=0) =>{
+  var fromatNumbers = (nStr, precision = 0) => {
     nStr = parseFloat(nStr).toFixed(precision);
     nStr += '';
     var x = nStr.split('.');
@@ -301,10 +306,10 @@ var oppModule = (function () {
     var x2 = x.length > 1 ? '.' + x[1] : '';
     var rgx = /(\d+)(\d{3})/;
     while (rgx.test(x1)) {
-            x1 = x1.replace(rgx, '$1' + ',' + '$2');
+      x1 = x1.replace(rgx, '$1' + ',' + '$2');
     }
     return x1 + x2;
-};
+  };
   var drawTemplate = (dataObj) => {
     var domArr = [];
     $.each(dataObj, function (k, v) {
@@ -318,7 +323,7 @@ var oppModule = (function () {
           domArr.push(str);
         } else if (v.dataType === "number") {
 
-         
+
           var str = `<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label ${v.addClass}">
                                     <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)*(\,[0-9]+)?" id="${v.jsonName}" ${v.property} ${v.addAttr}>
                                     <label class="mdl-textfield__label" for="${v.jsonName}">${v.displayName}</label>
@@ -352,8 +357,8 @@ var oppModule = (function () {
                                 <label class="mdl-textfield__label" for="${v.jsonName}">${v.displayName}</label>
                             </div>`
         domArr.push(str);
-      }else if(v.type == "textArea"){
-        var str =`
+      } else if (v.type == "textArea") {
+        var str = `
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label is-dirty ${v.addClass} " style="${v.styles}">
           <textarea class="mdl-textfield__input ${v.addClass}" type="text" rows= "3" id="${v.jsonName}"  ${v.property} ${v.addAttr}></textarea>
           <label class="mdl-textfield__label" for="${v.jsonName}">${v.displayName}</label>
@@ -369,15 +374,15 @@ var oppModule = (function () {
   var eventListeners = () => {
 
     $(".mdl-textfield .docPopout").off("click");
-    $(".mdl-textfield .docPopout").on("click",()=>{
+    $(".mdl-textfield .docPopout").on("click", () => {
       $(event.target).attr("class");
-      window.open("https://ivpdemo.sharepoint.com/Subscription%20Documentation/Forms/AllItems.aspx",'_blank');
+      window.open("https://ivpdemo.sharepoint.com/Subscription%20Documentation/Forms/AllItems.aspx", '_blank');
     })
     $("#editForm").off("click");
     $("#editForm").on("click", function () {
-      $("#editForm").css("display","none"); //Hide edit btn
+      $("#editForm").css("display", "none"); //Hide edit btn
 
-      $(".saveBtnGroup").css("display","block");
+      $(".saveBtnGroup").css("display", "block");
       $("#p12").addClass("makeGlow"); //make div glow
 
       $("#Opportunity_Form").removeClass("disabled"); //make div editable
@@ -385,22 +390,22 @@ var oppModule = (function () {
     $("#saveForm").off("click");
     $("#saveForm").on("click", function () {
       updateListData();
-     
-      
-      $(".saveBtnGroup").css("display","none");
-      $("#editForm").css("display","block");
+
+
+      $(".saveBtnGroup").css("display", "none");
+      $("#editForm").css("display", "block");
       $("#p12").removeClass("makeGlow");
       $("#Opportunity_Form").addClass("disabled");
-      
-      setTimeout(function(){
+
+      setTimeout(function () {
         location.reload();
-      },3000);
+      }, 3000);
     });
 
     $("#cancelForm").off("click");
-    $("#cancelForm").on("click",()=>{
-      $(".saveBtnGroup").css("display","none");
-      $("#editForm").css("display","block");
+    $("#cancelForm").on("click", () => {
+      $(".saveBtnGroup").css("display", "none");
+      $("#editForm").css("display", "block");
       $("#p12").removeClass("makeGlow");
       $("#Opportunity_Form").addClass("disabled");
     });
@@ -415,7 +420,7 @@ var oppModule = (function () {
     });
 
 
-    $AddCommentBox.attr("placeholder",$AddCommentBox.val());
+    $AddCommentBox.attr("placeholder", $AddCommentBox.val());
     $AddCommentBox.val("");
     $("#Opportunity_Form").addClass("disabled");
   };

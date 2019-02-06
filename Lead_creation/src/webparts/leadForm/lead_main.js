@@ -1,4 +1,4 @@
-var leadFormModule = (function () {
+var leadFormModule = function () {
 
   var __REQUESTDIGEST;
   var itemProp = {};
@@ -13,9 +13,11 @@ var leadFormModule = (function () {
       "type": "dropDown",
       "dataType": "string",
       "displayName": "Fund Interest",
-      "optionArr": ["Fund IVP Alpha", "Fund IVP Beta", "Fund IVP Gamma"],
-      "multiSelect": true,
-      "addClass":"is-upgraded is-dirty"
+      "select2Temp": true,
+      "optionArr": ["Fund IVP Alpha", "Fund IVP Beta", "Fund IVP Gamma"]
+      // ,
+      // "multiSelect": true,
+      // "addClass":"is-upgraded is-dirty"
     },
     {
       "jsonName": "Investor_x0020_Name",
@@ -101,17 +103,32 @@ var leadFormModule = (function () {
       "errortext": "Please enter a valid Date."
     }
   ];
+
+  var checkLocalStorage = () => {
+    var status = localStorage.getItem("listStatus");
+    if (status === null || status === "false") {
+      localStorage.setItem("listStatus", true);
+      location.reload();
+    } else {
+      localStorage.setItem("listStatus", false);
+      return status;
+    }
+  }
   var init = () => {
 
-    getAllData(); //Temp for checking the jsonName of all the data elements
+    if (checkLocalStorage() === "true") {
+      // getAllData(); //Temp for checking the jsonName of all the data elements
 
-    drawTemplate();
-    postLoadFeature();
-    eventListeners();
+      drawTemplate();
+      postLoadFeature();
+      eventListeners();
+
+    }
+
   };
-  var postLoadFeature=()=>{
+  var postLoadFeature = () => {
 
-    
+
   }
   var drawTemplate = () => {
 
@@ -161,7 +178,7 @@ var leadFormModule = (function () {
       } else if (v.type == "dropDown") {
         var getOptions = (arr) => {
           let tempArr = [];
-          if(!v.multiSelect)
+          if (!v.multiSelect)
             tempArr.push("<option value=''></option>");
           $.each(arr, (k, v) => {
             tempArr.push("<option value='" + v + "'>" + v + "</option>");
@@ -205,11 +222,16 @@ var leadFormModule = (function () {
         let date = new Date(elmValue);
         elmValue = date.toISOString();
       } else if (obj.multiSelect) {
-        debugger;
-        elmValue = {"results": elmValue};
-       
+        elmValue = {
+          "results": elmValue
+        };
+
       } else if (obj.dataType == "number") {
         elmValue = +elmValue;
+      } else if (obj.select2Temp) {
+        elmValue = {
+          "results": [elmValue]
+        };
       }
 
       obj["value"] = elmValue;
@@ -288,7 +310,8 @@ var leadFormModule = (function () {
         setTimeout(function () {
           $(".notify").removeClass("active");
           $("#notifyType").removeClass("success");
-        }, 3000);
+          resetForm();
+        }, 2000);
       }
 
       function logError(error) {
@@ -298,9 +321,7 @@ var leadFormModule = (function () {
         setTimeout(function () {
           $(".notify").removeClass("active");
           $("#notifyType").removeClass("failure");
-
-          resetForm();
-        }, 3000);
+        }, 2000);
       }
       createListItem("https://ivpdemo.sharepoint.com", "Lead_Details", itemProp, printInfo, logError);
       // itemProp = {"What_x0020_is_x0020_your_x0020_n":"hello world"}
@@ -309,14 +330,14 @@ var leadFormModule = (function () {
 
     getToken();
   };
-  var resetForm =()=>{
+  var resetForm = () => {
     gHeaders.map((obj) => {
       if (obj.multiSelect) {
-        $("#" + obj.jsonName).select2("val"," ")
-      }else{
+        $("#" + obj.jsonName).select2("val", " ")
+      } else {
         $("#" + obj.jsonName).val("");
       }
-       
+
 
     });
   };
@@ -334,7 +355,7 @@ var leadFormModule = (function () {
       resetForm();
     });
 
-    
+
   }
 
 
@@ -342,16 +363,19 @@ var leadFormModule = (function () {
   return {
     init
   }
-})();
+};
 
+// $(document).ready(function () {
+//   leadFormModule.init();
+// });
+// $(window).load(function () {
 
-$(document).ready(function () {
-  leadFormModule.init();
-});
-$(window).load(function () {
- 
-  $("#Fund_x0020_Interest").select2({"placeholder":"Select Fund Name.."});
-  $("#Fund_x0020_Interest").closest(".mdl-textfield").find(".select2-selection--multiple").addClass("randomShit");
-  $("#Fund_x0020_Interest").closest(".mdl-textfield").addClass("is-upgraded is-dirty");
-  
-});
+//   // $("#Fund_x0020_Interest").select2({"placeholder":"Select Fund Name.."});
+//   // $("#Fund_x0020_Interest").closest(".mdl-textfield").find(".select2-selection--multiple").addClass("randomShit");
+//   // $("#Fund_x0020_Interest").closest(".mdl-textfield").addClass("is-upgraded is-dirty");
+
+// });
+
+export {
+  leadFormModule
+};
