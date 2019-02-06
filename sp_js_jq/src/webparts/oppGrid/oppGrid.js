@@ -121,15 +121,15 @@ var gridExtention = (function () {
     var role = checkRolesMapping(roles);
     var URlStr;
     if (role == undefined) {
-        URlStr = "https://ivpdemo.sharepoint.com/_api/web/lists/getbytitle('Investment_Opportunity')/items";
+      URlStr = "https://ivpdemo.sharepoint.com/_api/web/lists/getbytitle('Investment_Opportunity')/items";
     } else {
-        URlStr ="https://ivpdemo.sharepoint.com/_api/web/lists/getbytitle('Investment_Opportunity')/items?$filter=PendingStage eq '"+role+"'"
+      URlStr = "https://ivpdemo.sharepoint.com/_api/web/lists/getbytitle('Investment_Opportunity')/items?$filter=PendingStage eq '" + role + "'"
     }
 
     table_elm = $("#tableMain").DataTable({
       "scrollX": true,
       "order": [
-        [7, "desc"]
+        [8, "desc"]
       ],
       "autoWidth": false,
       "language": {
@@ -148,9 +148,9 @@ var gridExtention = (function () {
             return [
               item.Id,
               item.Opportunity_Name,
+              item.Status,
               item.Fund,
-              item.Fund_Share_Class,
-              item.Tier,
+              
               item.Investor_Name,
               item.Probability,
               item.High_Inv_Limit,
@@ -170,27 +170,51 @@ var gridExtention = (function () {
           "render": function (data, type, row) {
             return fromatNumbers(data);
           },
-          "targets": [7, 8]
+          "targets": [6, 7]
         },
         {
           "render": function (data, type, row) {
 
             return formatDate(data);
           },
-          "targets": [9],
+          "targets": [8],
 
         },
         {
           "render": function (data, type, row) {
-
-            return "<i class='fa fa-external-link popOut' aria-hidden='true'></i>" + data;
+            var getClass = getColorClass(row,"icon");
+            return `<i class='fa fa-external-link popOut ${getClass === undefined? 'normalBlueIcon':getClass}' aria-hidden='true'></i>` + data;
           },
           "targets": 1
         }
-      ]
+      ],
+      "createdRow": function (row, data, index) {
+        var getClass = getColorClass(data);
+        
+        $('td', row).eq(1).addClass(getClass);
+        
+      }
 
     });
 
+    function getColorClass(dataArr,state="cell") {
+
+      if (dataArr.includes("Legal Approved") || dataArr.includes("Legal Approved")) {
+        if(state === "cell"){
+          return "acceptGreen";
+        }else if(state === "icon"){
+          return "normalGreenIcon";
+        }
+        
+      } else if (dataArr.includes("Legal Rejected") || dataArr.includes("TPA Rejected")) {
+        
+        if(state === "cell"){
+          return "rejectRed";
+        }else if(state === "icon"){
+          return "normalRedIcon";
+        }
+      }
+    };
     $("#tableMain_wrapper").prepend("<span class='headerName'>Opportunity Dashboard</span>")
 
   }

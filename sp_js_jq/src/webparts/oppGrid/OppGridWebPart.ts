@@ -31,9 +31,8 @@ export default class OppGridWebPart extends BaseClientSideWebPart<IOppGridWebPar
             <tr>
               <th>Id</th>
               <th>Opportunity Name</th>
+              <th>Status</th>
               <th>Fund</th>
-              <th>Share Class</th>
-              <th>Tier</th>
               <th>Investor Name</th>
               <th>Probability</th>
               <th>High Limit</th>

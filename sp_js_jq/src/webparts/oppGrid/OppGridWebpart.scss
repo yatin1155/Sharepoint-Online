@@ -111,6 +111,26 @@ $table-even: rgb(255, 255, 255);
     font-size: 20px;
     color: #ececec;
   }
+
+  .rejectRed{
+    // background: #ba5f5f7a !important;
+    color: red;
+    font-weight: 700;
+  }
+  .acceptGreen{
+    // background: #5fba7d7a !important;
+    color: green;
+    font-weight: 700;
+  }
+  .normalBlueIcon{
+    background: #43a2ec7a !important;
+  }
+  .normalGreenIcon{
+    background: #5fba7d7a !important;
+  }
+  .normalRedIcon{
+    background: #ba5f5f7a !important;
+  }
 }
 
 i.fa {
@@ -120,9 +140,8 @@ i.fa {
   box-shadow: 0 0 2px #888;
   padding: .5em .5em;
   margin-right: 9px;
-  background: green;
   color: #000;
-  background-color: #5fba7d;
+  font-weight: 700;
   cursor: pointer;
 }
 
