@@ -68,6 +68,10 @@
       "path": "https://code.jquery.com/jquery-1.12.4.min.js",
       "globalName": "jquery"
     },
+    "JConfirm": {
+      "path": "https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js",
+      "globalName": "JConfirm"
+    },
     "bootstrap": {
       "path": "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js",
       "globalName": "bootstrap",

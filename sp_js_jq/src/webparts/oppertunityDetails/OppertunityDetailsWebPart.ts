@@ -13,7 +13,7 @@ import 'jquery';
 import './material';
 import "material";
 import './main.scss';
-
+import "JConfirm";
 
 export interface IOppertunityDetailsWebPartProps {
   description: string;
@@ -31,7 +31,9 @@ export default class OppertunityDetailsWebPart extends BaseClientSideWebPart<IOp
     <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
 
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
-    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+
       <div class="${styles.portletMain} mdl-grid" id="p12">
         <div class="${styles["portlet-title"]} mdl-cell mdl-cell--12-col mdl-cell--12-col-table">
           <h8>

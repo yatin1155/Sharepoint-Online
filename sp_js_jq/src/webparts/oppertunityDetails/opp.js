@@ -93,7 +93,8 @@ var oppModule = (function () {
       "jsonName": "Send_Subs_Doc_Investor",
       "type": "dropDown",
       "dataType": "string",
-      "displayName": "Document Status"
+      "displayName": "Document Status",
+      "optionArr": ["None", "Documents Sent-Awaiting Response", "To be Sent", "Send Documents",  "Response Received"]
     },
     {
       "jsonName": "Comments",
@@ -131,7 +132,7 @@ var oppModule = (function () {
   var init = () => {
     getdata();
   }
-  
+
   var retrieveListItems = () => {
 
     var listName = "Investment_Opportunity";
@@ -345,13 +346,20 @@ var oppModule = (function () {
         }
 
       } else if (v.type == "dropDown") {
+
+        var getOptions = (arr) => {
+          let tempArr = [];
+
+          $.each(arr, (k, v) => {
+            tempArr.push("<option value='" + v + "'>" + v + "</option>");
+          });
+
+          return tempArr.join("");
+        };
+
         var str = `<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label ${v.addClass}" styles="${v.styles}"> 
                                 <select class="mdl-textfield__input" id="${v.jsonName}" name="${v.jsonName}">
-                                <option value="None">None</option>
-                                <option value="Documents Sent-Awaiting Response">Documents Sent-Awaiting Response</option>
-                                <option value="To be Sent">To be Sent</option>
-                                <option value="Send Documents">Send Documents</option>
-                                <option value="Response Received">Response Received</option>
+                                ${getOptions(v.optionArr)}
                                 </select>
                                 ${v.value =="Response Received"? '<i class="fa fa-folder-open docPopout"></i>':''}
                                 <label class="mdl-textfield__label" for="${v.jsonName}">${v.displayName}</label>
@@ -410,6 +418,73 @@ var oppModule = (function () {
       $("#Opportunity_Form").addClass("disabled");
     });
 
+    $("#Send_Subs_Doc_Investor").off("change");
+    $("#Send_Subs_Doc_Investor").on("change", (event) => {
+      var change = false;
+      if (event.target.value == "AlertBox") {
+
+        if (change) {
+          $.confirm({
+            theme: 'supervan',
+            content: "There are unsaved changes in the form.<br> Do you want to save them ?",
+            autoClose: 'cancelAction|7000',
+            escapeKey: 'cancelAction',
+            buttons: {
+              confirm: {
+                text: 'Save',
+                action: function () {
+                  $.alert('The changes were saved.');
+                }
+              },
+              cancelAction: {
+                btnClass: 'btn-red',
+                text: 'Cancel',
+                action: function () {
+                  $.alert('The changes were reverted.');
+                }
+              }
+            }
+          });
+        } else {
+          $.confirm({
+            title: 'A simple form',
+            content: `
+            <div class="form-group">
+              <label for="comment">Comment:</label>
+              <textarea class="form-control" rows="3" id="comment"></textarea>
+            </div>
+            `,
+            buttons: {
+              SendMsg: {
+                text: 'Send',
+                btnClass: 'btn-blue',
+                action: function () {
+                  var input = this.$content.find('#comment');
+                  var errorText = this.$content.find('.text-danger');
+                  if (!input.val().trim()) {
+                    $.alert({
+                      content: "Please don't keep the name field empty.",
+                      type: 'red'
+                    });
+                    return false;
+                  } else {
+                    $.alert("Message sent. Thanks.");
+                  }
+                }
+              },
+              cancel: function () {
+                // do nothing.
+              }
+            }
+          });
+        }
+      }
+
+    });
+
+    $("#p12 .mdl-textfield__input").not("#Send_Subs_Doc_Investor").on("change", () => {
+      // alert("aaaaaaa");
+    });
   }
 
   var parseData = (dataObj) => {

@@ -101,10 +101,10 @@ $light-blue: #004e8c;
 }
 
 .makeGlow{
-    -webkit-animation: glow .5s infinite alternate;
-    animation: glow .5s infinite alternate;
+    -webkit-animation: glowDiv .5s infinite alternate;
+    animation: glowDiv .5s infinite alternate;
 }
-@keyframes glow {
+@keyframes glowDiv {
     to {
         box-shadow:0 0 30px #008c4b;
     }
