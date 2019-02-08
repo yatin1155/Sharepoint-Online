@@ -73,7 +73,11 @@ var oppModule = (function () {
       "jsonName": "Percentage_Fund_Allocation",
       "type": "textField",
       "dataType": "percentage",
-      "displayName": "Percentage Allocation"
+      "displayName": "Percentage Allocation(%)",
+      "calcLogic": {
+        "dataIn": "Multiply by 100",
+        "dataOut": "Divide by 100"
+      }
     },
     {
       "jsonName": "Fund_Investment",
@@ -95,7 +99,7 @@ var oppModule = (function () {
       "type": "dropDown",
       "dataType": "string",
       "displayName": "Document Status",
-      "optionArr": ["None", "Documents Sent-Awaiting Response", "To be Sent", "Send Documents","Response under Legal Review","Response under TPA Review","Send Revised Document", "Response Received"]
+      "optionArr": ["None", "Documents Sent-Awaiting Response", "To be Sent", "Send Documents", "Response under Legal Review", "Response under TPA Review", "Send Revised Document", "Response Received"]
     },
     {
       "jsonName": "Comments",
@@ -168,6 +172,12 @@ var oppModule = (function () {
             }
             itemValue = fromatNumbers(itemValue + "", obj.precision);
 
+          } else if (obj.dataType === "percentage" && obj.calcLogic) {
+
+            if (obj.calcLogic.dataIn === "Multiply by 100") {
+              itemValue = itemValue * 100;
+            }
+
           }
 
           obj["value"] = itemValue;
@@ -177,6 +187,8 @@ var oppModule = (function () {
       }
     });
   };
+
+
   var __REQUESTDIGEST;
   var updateListData = (restrictedArray) => {
 
@@ -216,10 +228,21 @@ var oppModule = (function () {
     // };
     $.each(getattrArr, (key, value) => {
       var data = $("#" + value).val();
+
+      //for percent logic
+      if ($("#" + value).attr("calclogic") !== "undefined" && $("#" + value).attr("calclogic") !== undefined) {
+        let calcLogic = JSON.parse($("#" + value).attr("calclogic"));
+        if(calcLogic.dataOut === "Divide by 100"){
+          data = data/100;
+        }
+      }
+
+      //imporovement to be done later
+
       itemProperties[value] = data;
     })
 
-    if(restrictedArray && restrictedArray.length !== 0){
+    if (restrictedArray && restrictedArray.length !== 0) {
       $.each(restrictedArray, (key, value) => {
         delete itemProperties[value];
       });
@@ -342,7 +365,7 @@ var oppModule = (function () {
         } else if (v.dataType === "percentage") {
 
           var str = `<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label ${v.addClass}">
-                                    <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="${v.jsonName}" ${v.property} ${v.addAttr}>
+                                    <input class="mdl-textfield__input" type="text" calcLogic='${JSON.stringify(v.calcLogic)}' pattern="-?[0-9]*(\.[0-9]+)?" id="${v.jsonName}" ${v.property} ${v.addAttr}>
                                     <label class="mdl-textfield__label" for="${v.jsonName}">${v.displayName}</label>
                                     <span class="mdl-textfield__error">Input is not a number.</span>
                                 </div>`;
@@ -427,7 +450,7 @@ var oppModule = (function () {
 
     $("#Send_Subs_Doc_Investor").off("change");
     $("#Send_Subs_Doc_Investor").off("change", (event) => {
-      
+
       if (event.target.value == "Send Revised Document") {
 
         if (formDirty) {
@@ -470,7 +493,7 @@ var oppModule = (function () {
         } else {
           $.confirm({
             title: 'For Investor Revised document',
-            type:"dark",
+            type: "dark",
             content: `
             <div class="form-group">
               <label for="comment">Message:</label>
