@@ -5,6 +5,7 @@ import {
 
 var oppModule = (function () {
   var updatedHeaders;
+  var formDirty = false;
   var gHeaders = [{
       "jsonName": "Opportunity_Name",
       "type": "textField",
@@ -94,7 +95,7 @@ var oppModule = (function () {
       "type": "dropDown",
       "dataType": "string",
       "displayName": "Document Status",
-      "optionArr": ["None", "Documents Sent-Awaiting Response", "To be Sent", "Send Documents",  "Response Received"]
+      "optionArr": ["None", "Documents Sent-Awaiting Response", "To be Sent", "Send Documents","Response under Legal Review","Response under TPA Review","Send Revised Document", "Response Received"]
     },
     {
       "jsonName": "Comments",
@@ -177,7 +178,7 @@ var oppModule = (function () {
     });
   };
   var __REQUESTDIGEST;
-  var updateListData = () => {
+  var updateListData = (restrictedArray) => {
 
 
     $.ajax({
@@ -188,14 +189,14 @@ var oppModule = (function () {
       },
       success: function (data) {
         __REQUESTDIGEST = data.d.GetContextWebInformation.FormDigestValue;
-        temp();
+        temp(restrictedArray);
       },
       error: function (data, errorCode, errorMessage) {
         alert(errorMessage)
       }
     });
   };
-  var temp = () => {
+  var temp = (restrictedArray) => {
     var getattrArr = ["Tier", "Fund_Share_Class", "Probability", "Low_Inv_Limit", "High_Inv_Limit", "Final_x0020_Commitment", "Percentage_Fund_Allocation", "Fund_Investment", "Send_Subs_Doc_Investor", "Add_Comment"]
     // var itemArr = updatedHeaders.filter((obj)=>{
     //   if(getattrArr.includes(obj.jsonName)){
@@ -218,6 +219,11 @@ var oppModule = (function () {
       itemProperties[value] = data;
     })
 
+    if(restrictedArray && restrictedArray.length !== 0){
+      $.each(restrictedArray, (key, value) => {
+        delete itemProperties[value];
+      });
+    }
     console.log(itemProperties);
 
     //////Get data from the form
@@ -258,6 +264,7 @@ var oppModule = (function () {
       for (var prop in itemProperties) {
         itemPayload[prop] = itemProperties[prop];
       }
+      
       updateJson(listItemUri, itemPayload, success, failure);
     }
 
@@ -419,38 +426,54 @@ var oppModule = (function () {
     });
 
     $("#Send_Subs_Doc_Investor").off("change");
-    $("#Send_Subs_Doc_Investor").on("change", (event) => {
-      var change = false;
-      if (event.target.value == "AlertBox") {
+    $("#Send_Subs_Doc_Investor").off("change", (event) => {
+      
+      if (event.target.value == "Send Revised Document") {
 
-        if (change) {
+        if (formDirty) {
           $.confirm({
             theme: 'supervan',
             content: "There are unsaved changes in the form.<br> Do you want to save them ?",
-            autoClose: 'cancelAction|7000',
+            autoClose: 'cancelAction|10000',
             escapeKey: 'cancelAction',
             buttons: {
               confirm: {
                 text: 'Save',
                 action: function () {
+                  updateListData(["Send_Subs_Doc_Investor"]);
                   $.alert('The changes were saved.');
+                  setTimeout(function () {
+                    location.reload();
+                  }, 3000);
                 }
               },
               cancelAction: {
                 btnClass: 'btn-red',
                 text: 'Cancel',
                 action: function () {
+
+                  //For removing the edit mode
+                  $(".saveBtnGroup").css("display", "none");
+                  $("#editForm").css("display", "block");
+                  $("#p12").removeClass("makeGlow");
+                  $("#Opportunity_Form").addClass("disabled");
+
+
                   $.alert('The changes were reverted.');
+                  setTimeout(function () {
+                    location.reload();
+                  }, 3000);
                 }
               }
             }
           });
         } else {
           $.confirm({
-            title: 'A simple form',
+            title: 'For Investor Revised document',
+            type:"dark",
             content: `
             <div class="form-group">
-              <label for="comment">Comment:</label>
+              <label for="comment">Message:</label>
               <textarea class="form-control" rows="3" id="comment"></textarea>
             </div>
             `,
@@ -468,12 +491,19 @@ var oppModule = (function () {
                     });
                     return false;
                   } else {
+
+                    $("#Add_Comment").val(input.val());
+                    updateListData();
                     $.alert("Message sent. Thanks.");
+                    setTimeout(function () {
+                      location.reload();
+                    }, 3000);
                   }
                 }
               },
               cancel: function () {
-                // do nothing.
+                // do Refresh.
+                location.reload();
               }
             }
           });
@@ -483,7 +513,7 @@ var oppModule = (function () {
     });
 
     $("#p12 .mdl-textfield__input").not("#Send_Subs_Doc_Investor").on("change", () => {
-      // alert("aaaaaaa");
+      formDirty = true;
     });
   }
 
