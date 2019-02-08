@@ -60,7 +60,7 @@ var gridExtention = (function () {
     month = month.length > 1 ? month : '0' + month;
     var day = date.getDate().toString();
     day = day.length > 1 ? day : '0' + day;
-    var finalDate = day + "/" + month + "/" + year;
+    var finalDate = month + "/" + day + "/" + year;
 
     return finalDate;
   }
