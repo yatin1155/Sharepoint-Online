@@ -13,11 +13,9 @@ var leadFormModule = function () {
       "type": "dropDown",
       "dataType": "string",
       "displayName": "Fund Interest",
-      "select2Temp": true,
-      "optionArr": ["Fund IVP Alpha", "Fund IVP Beta", "Fund IVP Gamma"]
-      // ,
-      // "multiSelect": true,
-      // "addClass":"is-upgraded is-dirty"
+      "optionArr": ["Fund IVP Alpha", "Fund IVP Beta", "Fund IVP Gamma"],
+      "multiSelect": true,
+      "addClass": "is-upgraded is-dirty"
     },
     {
       "jsonName": "Investor_x0020_Name",
@@ -128,7 +126,9 @@ var leadFormModule = function () {
   };
   var postLoadFeature = () => {
 
-
+    
+    $("#Fund_x0020_Interest").select2();
+    $("#Fund_x0020_Interest").closest(".mdl-textfield").find(".select2-selection--multiple").addClass("randomShit");
   }
   var drawTemplate = () => {
 
@@ -186,7 +186,7 @@ var leadFormModule = function () {
 
           return tempArr.join("");
         };
-        var str = `<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label ${v.addClass}" styles="${v.styles}"> 
+        var str = `<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label ${v.addClass}" styles="${v.styles}" multi-Select2="${v.jsonName}"> 
                         <select class="mdl-textfield__input" id="${v.jsonName}" name="${v.jsonName}" ${v.multiSelect == true ? 'multiple=true':''} >
                         ${getOptions(v.optionArr)}
                         </select>
@@ -356,6 +356,16 @@ var leadFormModule = function () {
     });
 
 
+    $(".randomShit").on("focus",(e)=>{
+      //  var items = $("#Fund_x0020_Interest").val();
+       $("#Fund_x0020_Interest").closest(".mdl-textfield").addClass("is-upgraded is-dirty");
+      // if(items.length === 0){
+      //   $("#Fund_x0020_Interest").closest(".mdl-textfield").removeClass("is-upgraded is-dirty");
+      // }else{
+      //   $("#Fund_x0020_Interest").closest(".mdl-textfield").addClass("is-upgraded is-dirty");
+      // }
+      
+    })
   }
 
 
@@ -367,12 +377,19 @@ var leadFormModule = function () {
 
 // $(document).ready(function () {
 //   leadFormModule.init();
-// });
-// $(window).load(function () {
 
-//   // $("#Fund_x0020_Interest").select2({"placeholder":"Select Fund Name.."});
-//   // $("#Fund_x0020_Interest").closest(".mdl-textfield").find(".select2-selection--multiple").addClass("randomShit");
-//   // $("#Fund_x0020_Interest").closest(".mdl-textfield").addClass("is-upgraded is-dirty");
+  // setTimeout(()=>{
+  //   $("#Fund_x0020_Interest").select2();
+  //   $("#Fund_x0020_Interest").closest(".mdl-textfield").find(".select2-selection--multiple").addClass("randomShit");
+  // },1000)
+
+  // $("#Fund_x0020_Interest").closest(".mdl-textfield").addClass("is-upgraded is-dirty");
+// });
+// $(document).load(function () {
+// debugger;
+//   $("#Fund_x0020_Interest").select2({"placeholder":"Select Fund Name.."});
+//   $("#Fund_x0020_Interest").closest(".mdl-textfield").find(".select2-selection--multiple").addClass("randomShit");
+//   $("#Fund_x0020_Interest").closest(".mdl-textfield").addClass("is-upgraded is-dirty");
 
 // });
 

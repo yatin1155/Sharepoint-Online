@@ -120,3 +120,7 @@ div[data-automation-id='pageHeader'],
 div[data-sp-feature-tag='Comments'] {
   display: none !important;
 }
+
+[multi-select2="Fund_x0020_Interest"] .select2-container {
+  width: 100% !important;
+}

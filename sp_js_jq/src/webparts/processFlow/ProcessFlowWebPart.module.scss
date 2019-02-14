@@ -82,16 +82,20 @@ $disabled-Black : #525252;
     // display: inline-table;
     display: inline-flex;
     // width: 90%;
-    width: 100%;
+    // width: 100%;
     overflow-x: auto;
     height: 100%;
     padding-top: 20px;
     padding-top: 0px;
+
+    overflow-x: unset;
     .li {
       // display: inline;
       position: relative;
-      margin-top: 3%;
+      margin-top: 4%;
       width: 167px;
+
+      width: 190px;
       .dispText{
         position: absolute;
         width: 100%;
@@ -99,6 +103,7 @@ $disabled-Black : #525252;
         left: 3%;
         z-index: 3;
         color: $ligh-blue; 
+        left: 2%;
       }
       a,.alt {
         top: 40px;
@@ -117,6 +122,7 @@ $disabled-Black : #525252;
         text-decoration: none;
         color: #8093a7;
 
+        width: 100px;
         &:after {
           content: "";
           border-top: 12px solid transparent;
@@ -221,6 +227,8 @@ $disabled-Black : #525252;
     z-index: 2;
     top: 0px;
     left: 33px;
+
+    left: 42px;
   &:after {
     content: "";
     background-color: #e4e4e4;

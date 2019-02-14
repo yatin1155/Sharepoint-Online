@@ -32,36 +32,15 @@ var processModule = (function () {
         "status": null
     },
     {
-        "headerName": "TPA Review",
+        "headerName": "External Review",
         "jsonName": "TPA_Review",
         "Tooltip": null,
         "fontIcon": "fa-book",
         "status": null
     },
     {
-        "headerName": "Payment Extract Creation",
-        "jsonName": "Wire_Created",
-        "Tooltip": null,
-        "fontIcon": "fa-server",
-        "status": null
-    },
-    {
-        "headerName": "Treasury Acceptance",
-        "jsonName": "Treasury_Approval",
-        "Tooltip": null,
-        "fontIcon": "fa-money",
-        "status": null
-    },
-    {
-        "headerName": "Cashbook Matched",
-        "jsonName": "Cashbook_Matching",
-        "Tooltip": null,
-        "fontIcon": "fa-file-text",
-        "status": null
-    },
-    {
-        "headerName": "Investment Created",
-        "jsonName": "Investment_Created",
+        "headerName": "Final Status",
+        "jsonName": "FinalStatus",
         "Tooltip": null,
         "fontIcon": "fa-thumbs-up",
         "status": null
