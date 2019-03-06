@@ -21,19 +21,13 @@ export interface IProcessFlowWebPartProps {
 export default class ProcessFlowWebPart extends BaseClientSideWebPart < IProcessFlowWebPartProps > {
 
   public render(): void {
-
-    
     this.domElement.innerHTML = `
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
     
     <div id="${styles.crumbs}" class="portletProcess">
-
-      <div class="${styles.ul} scrollBody">
-        
-      </div>
+      <div class="${styles.ul} scrollBody"></div>
     </div>  
       `;
-
       require('./processScript');
   }
 

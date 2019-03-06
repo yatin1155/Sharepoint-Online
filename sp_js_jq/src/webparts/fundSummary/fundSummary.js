@@ -1,14 +1,12 @@
 import styles from './FundSummaryWebPart.module.scss';
 var fundSumaryModule = (function(){
-    
     var decodeUrl = () =>{
 
         let URL = window.location.href;
         let filter =  decodeURIComponent(URL.split("?")[1]).split("=");
         return filter;
     };
-
-    var init =()=>{
+    var init =()=>{   //Entry point
         getData();
     };
     var fromatNumbers = (nStr) =>{
@@ -23,8 +21,7 @@ var fundSumaryModule = (function(){
         return "$" + x1 + x2;
 
     };
-
-    var drawHtml = (data) =>{
+    var drawHtml = (data) =>{     // Draw the HTML using the fetched data
         var htmlArr=[];
         $.each(data[0],(k,v)=>{
             if(k == "fund"){
@@ -70,7 +67,7 @@ var fundSumaryModule = (function(){
         $("#label0-cardNew").append(htmlArr.join(""));
 
     }
-    var getData=()=>{
+    var getData=()=>{                // Fetch the list data
         retrieveListItems();
     };
     var retrieveListItems = ()=>{
@@ -101,11 +98,9 @@ var fundSumaryModule = (function(){
 
          });
     };
-
     return{
         init
     }
-
 })();
 
 $(document).ready(function(){

@@ -5,8 +5,8 @@ import {
 
 var oppModule = (function () {
   var updatedHeaders;
-  var formDirty = false;
-  var gHeaders = [{
+  var formDirty = false;  var __REQUESTDIGEST;
+  var gHeaders = [{            // config
       "jsonName": "Opportunity_Name",
       "type": "textField",
       "dataType": "string",
@@ -134,10 +134,9 @@ var oppModule = (function () {
     let filter = decodeURIComponent(URL.split("?")[1]).split("=");
     return filter;
   };
-  var init = () => {
+  var init = () => {  //Entry Point
     getdata();
   }
-
   var retrieveListItems = () => {
 
     var listName = "Investment_Opportunity";
@@ -187,9 +186,6 @@ var oppModule = (function () {
       }
     });
   };
-
-
-  var __REQUESTDIGEST;
   var updateListData = (restrictedArray) => {
 
 
@@ -312,14 +308,10 @@ var oppModule = (function () {
       }, 3000);
     }
   }
-
-
-
-
   var getdata = () => {
     retrieveListItems();
   }
-  var drawHtml = (dataObj) => {
+  var drawHtml = (dataObj) => {       //Draw the template
 
     drawTemplate(dataObj);
     parseData(dataObj);
@@ -408,8 +400,7 @@ var oppModule = (function () {
     });
     $("#Opportunity_Form .grid-item").append(domArr.join(""));
   }
-
-  var eventListeners = () => {
+  var eventListeners = () => {       // register the events of the template
 
     $(".mdl-textfield .docPopout").off("click");
     $(".mdl-textfield .docPopout").on("click", () => {
@@ -539,8 +530,7 @@ var oppModule = (function () {
       formDirty = true;
     });
   }
-
-  var parseData = (dataObj) => {
+  var parseData = (dataObj) => {      //Parse the data to the form
     let $AddCommentBox = $("#Add_Comment");
     $.each(dataObj, function (k, v) {
       $("#" + v.jsonName).val(v.value);
@@ -557,8 +547,6 @@ var oppModule = (function () {
     init
   }
 })();
-
-
 $(document).ready(function () {
   oppModule.init();
 });

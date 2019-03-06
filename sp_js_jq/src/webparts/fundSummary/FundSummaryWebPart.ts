@@ -44,7 +44,6 @@ export default class FundSummaryWebPart extends BaseClientSideWebPart<IFundSumma
     SPComponentLoader.loadCss(cssURL);
     this.domElement.innerHTML = `
     
-
     <div class="${styles.componentParent} row-fluid ${styles.largestLong} dc-chart drawn ${styles.cardNew}" id="cardNew" objecttype="label">
       <div id="label0-cardNew" class="span12 mZero ellipses  ${styles["largest-longest"]}">
       </div>

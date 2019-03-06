@@ -9,7 +9,7 @@ var processModule = (function () {
     let filter = decodeURIComponent(URL.split("?")[1]).split("=");
     return filter;
   };
-  var processArr = [
+  var processArr = [             // Process Config
     {
         "headerName": "New Opportunity",
         "jsonName": "Opportunity_Created",
@@ -52,8 +52,7 @@ var processModule = (function () {
     });
     return jsonArr;
   };
-
-  var modifyProcessArr = (itemObj) => {
+  var modifyProcessArr = (itemObj) => {     // Update the process config
     processArr = processArr.map((obj) => {
       obj["status"] = itemObj[obj["jsonName"]];
       obj["Tooltip"] =( itemObj[obj["jsonName"]] == "Remaining")? "To be Initiated": obj["status"];
@@ -63,7 +62,7 @@ var processModule = (function () {
     drawHtml();
 
   }
-  var drawHtml = () => {
+  var drawHtml = () => {      // Draw the html based on the config
     
     let domArr = [];
 
@@ -118,27 +117,5 @@ var processModule = (function () {
 })();
 
 $(document).ready(function () {
-
   processModule.init();
-
-  var btnPrev = $(`.${styles.scroll_arrow_prev}`)
-  var btnNext = $(`.${styles.scroll_arrow_next}`)
-  var processDiv = $(`.${styles.ul}`);
-
-  $(".scrollBody").children().last().addClass(`${styles.disabled}`)
-  // $(btnPrev).off("click");
-  // $(btnPrev).on("click",()=>{
-  //     let parentDiv = $(processDiv).offsetWidth;
-  //     let childElm_width = ($(processDiv).children().length) * ($(processDiv).children()[0].offsetWidth)
-
-
-  //    $(processDiv).scrollLeft(childElm_width/4);
-  // });
-  // $(btnNext).off("click");
-  // $(btnNext).on("click",()=>{
-
-
-  //     $(processDiv).scrollLeft();
-  // });
-
 });
